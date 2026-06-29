@@ -1,0 +1,519 @@
+# TargetMaps — Design System for Claude
+# claude.design v1.0 · 2026-06-29
+#
+# DROP THIS FILE IN ANY REPO.
+# Claude will apply TargetMaps brand identity when generating
+# DOCX, PPTX, XLSX, HTML, or PDF documents.
+#
+# Source of truth: imagen_institucional_targetmaps/
+# Scripts:         scripts/tm_brand.py · tm_docx.py · tm_pptx.py · tm_xlsx.py
+# Templates:       templates_targetmaps/*.dotx · *.potx
+# Logos CDN:       https://github.com/fhorna-lab/branding_targetmaps
+
+---
+
+## IDENTITY
+
+| Field            | Value                                              |
+|------------------|----------------------------------------------------|
+| Full name        | TargetMaps \| GEO ANALYTICS FOR BUSINESS           |
+| Trade name       | TMAPS                                              |
+| RUC              | [REDACTED]                                        |
+| Address          | Lima, Perú |
+| Web              | www.targetmaps.pe                                  |
+
+Contacts:
+- Fernando Horna — Socio-Director · contacto@targetmaps.pe · [REDACTED]
+- Victoria Ballón — Ejecutiva Comercial · contacto@targetmaps.pe · [REDACTED]
+- Carlos Horna — CEO · contacto@targetmaps.pe · [REDACTED]
+
+---
+
+## COLOR PALETTE
+
+NEVER invent colors outside this list.
+
+| Token          | HEX     | RGB              | Use                                        |
+|----------------|---------|------------------|--------------------------------------------|
+| blue_dark      | #273371 | (39, 51, 113)    | Dark backgrounds, cover, H1, callout bg    |
+| blue_mid       | #2F71B8 | (47, 113, 184)   | H2, table header, bars, separators         |
+| gray           | #909091 | (144, 144, 145)  | Secondary text, footnotes, footer          |
+| table_stripe   | #F2F6FB | (242, 246, 251)  | Even table rows                            |
+| table_border   | #C0C4CC | (192, 196, 204)  | Table grid borders (0.5pt)                 |
+| bg_light       | #F2F2F2 | (242, 242, 242)  | Confidentiality block, neutral bg          |
+| white          | #FFFFFF | (255, 255, 255)  | Page background, odd table rows            |
+| black          | #000000 | (0, 0, 0)        | Body text                                  |
+| subtotal       | #D5E2F4 | (213, 226, 244)  | Subtotal rows in Excel (between stripe/total) |
+| geocoder       | #169A38 | (22, 154, 56)    | Product: GeoCoder                          |
+| geoanalytics   | #28529F | (40, 82, 159)    | Product: GeoAnalytics                      |
+| leadgen        | #F4991D | (244, 153, 29)   | Product: LeadGenerator                     |
+
+CSS custom properties (for HTML/PDF output):
+```css
+:root {
+  --tm-blue-dark:    #273371;
+  --tm-blue-mid:     #2F71B8;
+  --tm-gray:         #909091;
+  --tm-table-stripe: #F2F6FB;
+  --tm-table-border: #C0C4CC;
+  --tm-bg-light:     #F2F2F2;
+  --tm-white:        #FFFFFF;
+  --tm-geocoder:     #169A38;
+  --tm-geoanalytics: #28529F;
+  --tm-leadgen:      #F4991D;
+}
+```
+
+---
+
+## TYPOGRAPHY
+
+| Context          | Font          | Fallback  | Weight      | Size  | Color     | Case       |
+|------------------|---------------|-----------|-------------|-------|-----------|------------|
+| Body / headings  | Corbel        | Calibri   | Regular     | 10pt  | #000000   | —          |
+| H1 section       | Corbel        | Calibri   | Bold        | 12pt  | #273371   | UPPERCASE  |
+| H2 subsection    | Corbel        | Calibri   | Bold        | 11pt  | #2F71B8   | Normal     |
+| Cover title      | Corbel        | Calibri   | Bold        | 26pt  | #273371   | UPPERCASE  |
+| Cover subtitle   | Corbel        | Calibri   | Bold        | 13pt  | #2F71B8   | —          |
+| Cover client     | Corbel        | Calibri   | Bold        | 24pt  | #273371   | —          |
+| Eyebrow label    | Corbel        | Calibri   | Bold        | 9pt   | #2F71B8   | UPPERCASE  |
+| Table cells      | Aptos         | Calibri   | Regular     | 9pt   | #000000   | —          |
+| Table header     | Aptos         | Calibri   | Bold        | 9pt   | #FFFFFF   | —          |
+| Footnote/caption | Corbel Light  | Calibri   | Light Italic| 8pt   | #909091   | —          |
+| Footer contact   | Corbel        | Calibri   | Regular     | 8pt   | #000000   | —          |
+| Monospace/formula| Courier New   | —         | Regular     | 10pt  | #273371   | —          |
+
+CSS font stack: `'Corbel', 'Calibri', 'Gill Sans MT', sans-serif`
+
+PROHIBITED fonts: Comic Sans, Arial, Times New Roman, Inter, Roboto.
+
+---
+
+## LOGOS
+
+Base URL: `https://raw.githubusercontent.com/fhorna-lab/branding_targetmaps/main/`
+
+| Key          | URL / Path                                                 | Use                              |
+|--------------|------------------------------------------------------------|----------------------------------|
+| color        | …/targetmaps_Logo.png                                      | White / light backgrounds        |
+| white        | …/Original_logo_TargetMaps_Blanco.png                      | Dark backgrounds (#273371)       |
+| white_alt    | …/logo_TargetMaps_Blanco.png                               | Dark backgrounds (alt)           |
+| firma        | …/targetmaps_Logo_firma.png                                | With signature                   |
+| small        | …/targetmaps_Logo_small.png                                | Compact spaces                   |
+| sin_gab      | …/targetmaps_Logo_sin_GAB.png                              | Without "GEO ANALYTICS" tagline  |
+| whatsapp     | …/targetmaps_Logo_whatsapp.png                             | Social media / WhatsApp          |
+| geocoder     | …/targetmaps_GeoCoder.png                                  | Product: GeoCoder                |
+| geoanalytics | …/targetmaps_GeoAnalitics.png                              | Product: GeoAnalytics            |
+| leadgen      | …/targetmaps_LeadGenerator.png                             | Product: LeadGenerator           |
+| navego       | …/logoNavego.png                                           | Product: Navego360               |
+
+Logo rules:
+- Light background → logo `color`
+- Dark background (#273371) → logo `white`
+- NEVER distort, rotate, recolor, or add shadows
+- Minimum exclusion zone: `x` on all sides (ideally `2x`)
+- Never duplicate logo in body if cover template already has it in the header
+
+---
+
+## TABLE RULES
+
+| Part         | Background | Text     | Weight | Notes                     |
+|--------------|------------|----------|--------|---------------------------|
+| Header row   | #2F71B8    | #FFFFFF  | Bold   | NEVER use #273371 here    |
+| Even rows    | #F2F6FB    | #000000  | —      |                           |
+| Odd rows     | #FFFFFF    | #000000  | —      |                           |
+| Subtotal row | #D5E2F4    | #273371  | Bold   | Excel only                |
+| Total row    | #273371    | #FFFFFF  | Bold   |                           |
+| Borders      | #C0C4CC    | —        | —      | 0.5pt, single style       |
+| Cell padding | —          | —        | —      | 5px vertical, 9px horizontal |
+| First col (kv tables) | — | —      | Bold   |                           |
+
+Font for table cells: Aptos (fallback: Calibri). NOT Corbel.
+
+---
+
+## DOCUMENT STRUCTURES
+
+### Commercial Proposal (Propuesta Comercial) — mandatory order
+
+| # | Section                   | Rule                                              |
+|---|---------------------------|---------------------------------------------------|
+| — | Cover                     | tipo_doc · title · subtitle · client · elaborado_por · date · classification |
+| — | Executive Summary         | What/How/When/How much table + urgency callout    |
+| 1 | Background / Context      | Problem in client's terms                         |
+| 2 | Objectives                | Bullets                                           |
+| 3 | Strategy Map (optional)   | Table or strategic diagram                        |
+| 4 | Methodology               | Diagnosis → Optimal Locations → Tactical Plan     |
+| 5 | Deliverables              | Table: item / description / estimated date        |
+| 6 | Economic Proposal         | Price table + IGV note + justification            |
+| 7 | Schedule (optional)       | Phases with business days                         |
+| 8 | Considerations & Exclusions | Scope management                                |
+| 9 | Next Steps (optional)     | Exactly 3 concrete actions                        |
+| LAST | Why TargetMaps         | Differentiators + "Acerca de" text               |
+| — | Contact block             | 3 standard lines                                  |
+
+CRITICAL: "Por Qué TargetMaps" ALWAYS LAST — NEVER at the beginning.
+PROHIBITED at start: generic "Acerca de TargetMaps" section.
+
+Proposal numbering format: `ClienteAñoVersión` — e.g., `WIN2026v1`, `Casaideas2026v1`
+
+### Technical Document / GeoData — mandatory order
+
+1. Cover
+2. Service description
+3. Technical sheet (key-value table)
+4. Budget (itemized table)
+5. Notes and Conditions
+6. Contact block
+
+### Slide Presentation
+
+| Slide type    | Background | Logo      | Text color       |
+|---------------|------------|-----------|------------------|
+| Cover         | #273371    | white     | #FFFFFF / #2F71B8|
+| Content       | #FFFFFF    | —         | #273371 title    |
+| Section divider| #2F71B8   | —         | #FFFFFF          |
+| Closing       | #273371    | white     | #FFFFFF          |
+
+- Top bar on content slides: #2F71B8, ~0.7 inches tall
+- Bottom bar on cover/closing slides: #2F71B8, ~0.6 inches tall
+- Max 6 text lines per slide
+- Footer on content slides: www.targetmaps.pe (right-aligned, gray, 8pt)
+
+---
+
+## REUSABLE TEXTS
+
+### Confidentiality note
+> Documento estrictamente confidencial. Prohibida su reproducción sin autorización escrita de TargetMaps.
+
+### IGV note
+> *Precios no incluyen IGV (18%)
+
+### "Acerca de TargetMaps" — Generic version
+> TargetMaps es una empresa peruana con más de 10 años de experiencia, especializada en el desarrollo de soluciones y consultoría basadas en geolocalización.
+
+### "Acerca de TargetMaps" — Real estate version
+> TargetMaps es la empresa de geo analytics más especializada del Perú en inteligencia de mercado para el sector inmobiliario. Con más de 15 años produciendo contenido espacial para análisis de mercados inmobiliarios y comerciales.
+
+### "Acerca de TargetMaps" — Telecom version
+> TargetMaps es la empresa de geo analytics más especializada del Perú. Somos los únicos proveedores de datos geoespaciales en el país con producción propia de capas temáticas urbanas — no revendemos datos de terceros, los construimos y actualizamos nosotros.
+
+### Price justification — Real estate
+> "S/ 550 por proyecto es el costo de obtener inteligencia de primera mano con evidencia verificable. Comparado con el impacto de una decisión de precios mal fundamentada —que puede representar millones en ingresos perdidos— la inversión se justifica sola."
+
+### Price justification — Telecom
+> "1,200,000 registros enriquecidos al año equivalen a S/ 0.14 por registro. Con ese dato, el cliente puede alimentar un modelo de scoring que optimiza el 100% de su esfuerzo comercial."
+
+### Standard GeoData Technical Sheet
+
+| Field                  | Value                                                                    |
+|------------------------|--------------------------------------------------------------------------|
+| Sistema de coordenadas | WGS 84 Latitud - Longitud                                               |
+| Cantidad de capas      | +100 (varía por servicio)                                               |
+| Precisión              | ± 10 m (esc. 1:10,000)                                                  |
+| Formato de archivo     | SHP – DWG – GeoJSON – DNG (*exportable a cualquier formato estándar global) |
+
+---
+
+## RECOMMENDED COLUMN WIDTHS (DOCX tables, in cm)
+
+| Table type        | Distribution           |
+|-------------------|------------------------|
+| Key-Value (2 col) | 4.5 + 11.5             |
+| Prices (3 col)    | 1.0 + 11.0 + 4.0       |
+| Deliverables (3 col) | 4.0 + 9.0 + 3.0    |
+| Executive Summary (2 col) | 4.0 + 12.0    |
+| Schedule (3 col)  | 2.5 + 11.0 + 2.5       |
+
+---
+
+## HTML / PDF COMPONENT SNIPPETS
+
+### Cover page
+```html
+<div style="background:#fff; min-height:100vh; display:flex; flex-direction:column; font-family:'Corbel','Calibri',sans-serif;">
+  <div style="background:#273371; height:8px; width:100%; flex-shrink:0;"></div>
+  <div style="padding:2.5rem 1.5in; flex:1; display:flex; flex-direction:column;">
+    <div style="margin-bottom:auto; padding-bottom:2rem;">
+      <img src="https://raw.githubusercontent.com/fhorna-lab/branding_targetmaps/main/targetmaps_Logo.png" alt="TargetMaps" style="height:52px; display:block;">
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:1rem 0 1.5rem;">
+      <p style="font-size:9pt; font-weight:700; color:#2F71B8; text-transform:uppercase; letter-spacing:.14em; margin:0 0 14px;">TIPO DE DOCUMENTO</p>
+      <h1 style="font-size:26pt; font-weight:700; color:#273371; margin:0 0 12px; line-height:1.1;">TÍTULO DEL DOCUMENTO</h1>
+      <p style="font-size:13pt; font-weight:600; color:#2F71B8; margin:0 0 28px;">Subtítulo del servicio</p>
+      <div style="width:56px; height:3px; background:#2F71B8; margin-bottom:26px;"></div>
+      <p style="font-size:10pt; color:#909091; letter-spacing:.04em;">Versión X · Mes 2026</p>
+    </div>
+    <div style="margin-top:auto; padding-top:1.5rem; border-top:1.5pt solid #2F71B8;">
+      <table style="width:100%; border-collapse:collapse;">
+        <tr><td style="padding:8px 0; font-size:8pt; color:#909091; font-weight:700; text-transform:uppercase; letter-spacing:.07em; width:140px; border-bottom:.5pt solid #e0e4ec;">Preparado para</td><td style="padding:8px 0 8px 16px; font-size:10.5pt; color:#273371; font-weight:700; border-bottom:.5pt solid #e0e4ec;">NOMBRE DEL CLIENTE</td></tr>
+        <tr><td style="padding:8px 0; font-size:8pt; color:#909091; font-weight:700; text-transform:uppercase; letter-spacing:.07em; border-bottom:.5pt solid #e0e4ec;">Preparado por</td><td style="padding:8px 0 8px 16px; font-size:10pt; color:#111; border-bottom:.5pt solid #e0e4ec;">TargetMaps · Fernando Horna</td></tr>
+        <tr><td style="padding:8px 0; font-size:8pt; color:#909091; font-weight:700; text-transform:uppercase; letter-spacing:.07em; border-bottom:.5pt solid #e0e4ec;">Fecha</td><td style="padding:8px 0 8px 16px; font-size:10pt; color:#111; border-bottom:.5pt solid #e0e4ec;">Mes 2026</td></tr>
+        <tr><td style="padding:8px 0; font-size:8pt; color:#909091; font-weight:700; text-transform:uppercase; letter-spacing:.07em;">Clasificación</td><td style="padding:8px 0 8px 16px; font-size:10pt; color:#111;">Confidencial</td></tr>
+      </table>
+      <div style="margin-top:20px; background:#F2F2F2; padding:10px 14px; font-size:8pt; color:#909091; font-style:italic; text-align:center;">
+        Documento estrictamente confidencial. Prohibida su reproducción sin autorización escrita de TargetMaps.<br>
+        <span style="font-style:normal;">www.targetmaps.pe</span>
+      </div>
+    </div>
+  </div>
+  <div style="background:#2F71B8; height:5px; width:100%; flex-shrink:0;"></div>
+</div>
+```
+
+### Section heading H1
+```html
+<div style="font-family:'Corbel','Calibri',sans-serif; font-size:10pt; font-weight:700; color:#273371; text-transform:uppercase; letter-spacing:.08em; margin:32px 0 8px; padding-bottom:5px; border-bottom:2px solid #2F71B8; display:flex; align-items:center; gap:9px;">
+  <span style="display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; background:#2F71B8; color:#fff; border-radius:50%; font-size:8pt; flex-shrink:0;">1</span>
+  NOMBRE DE SECCIÓN
+</div>
+```
+
+### Section heading H2
+```html
+<div style="font-size:10pt; font-weight:700; color:#2F71B8; margin:20px 0 7px; font-family:'Corbel','Calibri',sans-serif;">
+  1.1 Nombre de subsección
+</div>
+```
+
+### Standard table
+```html
+<table style="width:100%; border-collapse:collapse; font-size:9pt; font-family:'Aptos','Calibri',sans-serif; margin:6px 0 14px;">
+  <thead>
+    <tr>
+      <th style="background:#2F71B8; color:#fff; font-weight:700; padding:6px 9px; text-align:left; border:.5pt solid #C0C4CC;">Columna 1</th>
+      <th style="background:#2F71B8; color:#fff; font-weight:700; padding:6px 9px; text-align:left; border:.5pt solid #C0C4CC;">Columna 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:5px 9px; border:.5pt solid #C0C4CC; background:#fff; font-weight:700;">Dato A</td>
+      <td style="padding:5px 9px; border:.5pt solid #C0C4CC; background:#fff;">Valor A</td>
+    </tr>
+    <tr>
+      <td style="padding:5px 9px; border:.5pt solid #C0C4CC; background:#F2F6FB; font-weight:700;">Dato B</td>
+      <td style="padding:5px 9px; border:.5pt solid #C0C4CC; background:#F2F6FB;">Valor B</td>
+    </tr>
+    <tr>
+      <td style="padding:5px 9px; border:.5pt solid #C0C4CC; background:#273371; color:#fff; font-weight:700;" colspan="2">TOTAL</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### Urgency callout
+```html
+<div style="background:#273371; color:#fff; padding:14px 18px; margin:14px 0; font-size:9pt; font-style:italic; font-family:'Corbel','Calibri',sans-serif;">
+  <strong style="font-style:normal; display:block; margin-bottom:4px; color:#a8c2e8; font-size:9.5pt;">¿Por qué actuar ahora?</strong>
+  [El mercado / La competencia / El costo de esperar] — esperar implica [pérdida medible].
+</div>
+```
+
+### Strength card / highlight
+```html
+<div style="border-left:4px solid #2F71B8; background:#F2F6FB; padding:12px 16px; margin:10px 0; font-family:'Corbel','Calibri',sans-serif;">
+  <h4 style="font-size:10pt; font-weight:700; color:#273371; margin:0 0 5px;">Título del punto</h4>
+  <p style="font-size:9.5pt; color:#111; margin:0; line-height:1.6;">Descripción del punto...</p>
+</div>
+```
+
+### KPI tile
+```html
+<div style="flex:1; background:#F2F6FB; border-left:4px solid #2F71B8; padding:13px 15px; font-family:'Corbel','Calibri',sans-serif;">
+  <div style="font-size:7.5pt; color:#909091; text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px;">INDICADOR</div>
+  <div style="font-size:18pt; font-weight:700; color:#273371; line-height:1.1;">1,234,567</div>
+  <div style="font-size:9pt; color:#2F71B8; font-weight:600; margin-top:3px;">→ 1,500,000 en 2031 · +21.5%</div>
+</div>
+```
+
+### Formula / code block
+```html
+<div style="background:#F2F6FB; border-left:4px solid #2F71B8; padding:10px 16px; font-family:'Courier New',monospace; font-size:10pt; color:#273371; margin:8px 0 14px;">
+  resultado(x, t) = valor_base(x, t) ÷ factor(x, t)
+</div>
+```
+
+### Confidentiality block
+```html
+<div style="background:#F2F2F2; padding:10px 14px; font-size:8pt; color:#909091; font-style:italic; text-align:center; margin-top:14px; font-family:'Corbel','Calibri',sans-serif;">
+  Documento estrictamente confidencial. Prohibida su reproducción sin autorización escrita de TargetMaps.
+</div>
+```
+
+### Contact block (footer)
+```html
+<div style="border-top:1pt solid #C0C4CC; margin-top:44px; padding-top:14px; font-family:'Corbel','Calibri',sans-serif;">
+  <p style="font-size:8pt; color:#111; margin:0 0 3px;"><strong>Fernando Horna</strong> — Socio-Director · contacto@targetmaps.pe · [REDACTED]</p>
+  <p style="font-size:8pt; color:#111; margin:0 0 3px;"><strong>Victoria Ballón</strong> — Ejecutiva Comercial · contacto@targetmaps.pe · [REDACTED]</p>
+  <p style="font-size:8pt; color:#909091; margin:0;">Lima, Perú · www.targetmaps.pe</p>
+</div>
+```
+
+---
+
+## PYTHON SCRIPTS (Office generation)
+
+Location: `imagen_institucional_targetmaps/scripts/`
+
+Install: `pip install python-docx python-pptx openpyxl`
+
+| File        | Library      | Purpose                                              |
+|-------------|--------------|------------------------------------------------------|
+| tm_brand.py | stdlib only  | Brand constants: COLORS, FONTS, SIZES, CONTACT, LOGOS, TEXTOS |
+| tm_docx.py  | python-docx  | DOCX helpers: cover, headings, tables, callouts, footer |
+| tm_pptx.py  | python-pptx  | PPTX helpers: cover/content/closing slides, tables, KPI tiles |
+| tm_xlsx.py  | openpyxl     | XLSX helpers: branded tables, KPI rows, titles, footers |
+
+### DOCX — Key functions
+
+```python
+from tm_docx import (
+    setup_document,      # Set margins and base font
+    add_cover,           # Cover page
+    add_heading1,        # H1: UPPERCASE, blue_dark, underline blue_mid
+    add_heading2,        # H2: blue_mid, bold
+    add_body_text,       # 10pt body paragraph
+    add_bullet,          # Bullet with optional bold prefix
+    add_caption,         # 8pt gray italic footnote
+    add_table,           # Full branded table (header + alternating rows + optional total)
+    add_kv_table,        # Key-value 2-column table
+    add_callout,         # Dark blue callout box
+    add_strength_card,   # Left-border highlight card
+    add_formula_box,     # Monospace formula block
+    add_contact_footer,  # Standard 3-line contact block
+    add_confidentiality_block,
+    build_propuesta,     # High-level: complete proposal in one call
+)
+```
+
+### PPTX — Key functions
+
+```python
+from tm_pptx import (
+    create_presentation,    # 16:9 blank presentation
+    add_cover_slide,        # Dark blue cover: logo white, title, subtitle, client
+    add_content_slide,      # White slide: blue top bar, title
+    add_section_divider,    # Blue mid full-slide section break
+    add_closing_slide,      # Dark blue closing: logo, contacts
+    add_table_slide,        # Insert branded table into a slide
+    add_kpi_tile,           # KPI tile: stripe bg, blue left border, label/value/delta
+    add_text_box,           # Generic text box
+    add_rect,               # Colored rectangle
+    add_logo,               # Logo image (path-based)
+)
+```
+
+### XLSX — Key functions
+
+```python
+from tm_xlsx import (
+    setup_workbook,         # Workbook with TargetMaps metadata
+    add_branded_table,      # Full table: header + alternating + subtotal + total rows
+    add_sheet_title,        # Title + subtitle at top of sheet
+    add_kpi_row,            # Row of KPI tiles (label / value / delta)
+    style_header_cell,      # Single header cell
+    style_data_cell,        # Single data cell (even/odd aware)
+    style_total_cell,       # Single total row cell (#273371)
+    style_subtotal_cell,    # Single subtotal cell (#D5E2F4)
+    add_footer_row,         # Source + confidentiality + IGV note
+    build_report_workbook,  # High-level: 3-sheet report (E1/E2/E3)
+    save_workbook,          # Save with .xlsx enforcement
+)
+```
+
+### Usage examples
+
+**Complete proposal DOCX:**
+```python
+from tm_docx import build_propuesta
+from tm_brand import get_acerca_de
+
+doc = build_propuesta({
+    "tipo_doc":      "PROPUESTA TÉCNICO-ECONÓMICA",
+    "titulo":        "Data Enrichment para WIN Internet",
+    "subtitulo":     "Enriquecimiento de base de suscriptores",
+    "cliente":       "WIN Internet · César Atalaya",
+    "numero":        "WIN2026v1",
+    "elaborado_por": "Fernando Horna · Socio-Director · TargetMaps",
+    "fecha":         "Junio 2026",
+    "resumen_ejecutivo": "Este documento presenta...",
+    "urgencia":      "El mercado avanza — cada mes sin datos precisos es posición perdida.",
+    "antecedentes":  "WIN despliega fibra en zonas urbanas...",
+    "objetivos":     ["Enriquecer base con hogares verticales", "Proyectar 2025-2031"],
+    "entregables":   [{"item": "E1", "descripcion": "Hogares por departamento", "fecha_est": "5 días"}],
+    "precios":       [{"nro": 1, "descripcion": "Data Enrichment Lima", "precio": 5000}],
+    "proximos_pasos":["Aprobar propuesta", "Enviar base de datos", "Iniciar procesamiento"],
+    "por_que_targetmaps": [
+        ("Inventario propio de edificios", "Más de 15,000 edificios georreferenciados 2017-2025."),
+        ("Única fuente sin datos de terceros", "Producción propia — no revendemos datos."),
+    ],
+    "acerca_de": get_acerca_de("telecomunicaciones"),
+})
+doc.save("WIN2026v1_propuesta.docx")
+```
+
+**Presentation PPTX:**
+```python
+from tm_pptx import create_presentation, add_cover_slide, add_content_slide, add_kpi_tile, add_closing_slide
+
+prs = create_presentation()
+add_cover_slide(prs, titulo="Geo Analytics para WIN", subtitulo="Proyección Hogares 2025-2031",
+                cliente="WIN Internet", fecha="Junio 2026")
+slide = add_content_slide(prs, titulo="Cifras Clave del Modelo")
+add_kpi_tile(slide, "Hogares verticales nacionales", "1,336,433", "→ 1,781,637 en 2031 · +33.3%", left=0.5, top=2.0)
+add_kpi_tile(slide, "% vertical Lima",               "30.3% → 34.1%", "+3.8 pp (2025-2031)",        left=4.6, top=2.0)
+add_kpi_tile(slide, "Pisada WIN — verticales",       "1,263,478", "→ 1,693,497 en 2031",            left=8.7, top=2.0)
+add_closing_slide(prs)
+prs.save("WIN2026_presentacion.pptx")
+```
+
+**Excel report (3 sheets):**
+```python
+from tm_xlsx import build_report_workbook, save_workbook
+
+wb = build_report_workbook(
+    e1_data={
+        "headers":   ["Departamento", "2025", "2026", "2027", "2028", "2029", "2030", "2031"],
+        "data":      [["Lima", "3,376,850", "3,457,940", "3,539,649", "3,622,107", "3,705,460", "3,789,843", "3,876,588"]],
+        "total_row": ["NACIONAL", "10,419,615", "10,617,110", "10,815,016", "11,013,651", "11,213,595", "11,415,428", "11,622,944"],
+        "num_cols":  {1,2,3,4,5,6,7},
+        "source":    "TargetMaps sobre proyecciones INEI 2018-2031",
+    },
+    title="Proyección Hogares Verticales 2025-2031",
+    client="WIN Internet",
+)
+save_workbook(wb, "E1_hogares_depto_2025-2031.xlsx")
+```
+
+---
+
+## PRE-DELIVERY CHECKLIST
+
+Before delivering any document, verify:
+
+- [ ] Cover has no logo duplicated in the body
+- [ ] All colors are within the palette defined above
+- [ ] Font is Corbel / Calibri (Aptos for table cells) throughout
+- [ ] Table headers use #2F71B8 (blue_mid) — NOT #273371
+- [ ] Contact block is included
+- [ ] "Por Qué TargetMaps" is at the end (proposals only)
+- [ ] IGV note included if prices are present
+- [ ] Confidentiality note included
+- [ ] Proposal number follows format `ClienteAñoVersión`
+- [ ] Language: Spanish (Peru) for all client-facing documents
+- [ ] Prices always net of IGV
+
+---
+
+## GENERAL RULES
+
+- Language: Spanish (Peru) in all client documents
+- Prices: always net of IGV; include footnote `*Precios no incluyen IGV (18%)`
+- Tone: professional, direct, business-oriented; avoid unnecessary technical jargon
+- Table headers: ALWAYS #2F71B8 (blue_mid), NEVER #273371 (blue_dark)
+- "Por Qué TargetMaps": ALWAYS at the end of commercial proposals, NEVER at the start
+- Logo: NEVER duplicate in body if cover template already includes it
+- Colors: NEVER use colors outside the defined palette
+- Fonts: NEVER use fonts other than Corbel / Calibri / Aptos
