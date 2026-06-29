@@ -18,14 +18,8 @@
 |------------------|----------------------------------------------------|
 | Full name        | TargetMaps \| GEO ANALYTICS FOR BUSINESS           |
 | Trade name       | TMAPS                                              |
-| RUC              | [REDACTED]                                        |
-| Address          | Lima, Perú |
 | Web              | www.targetmaps.pe                                  |
-
-Contacts:
-- Fernando Horna — Socio-Director · contacto@targetmaps.pe · [REDACTED]
-- Victoria Ballón — Ejecutiva Comercial · contacto@targetmaps.pe · [REDACTED]
-- Carlos Horna — CEO · contacto@targetmaps.pe · [REDACTED]
+| Contact          | contacto@targetmaps.pe                             |
 
 ---
 
@@ -345,9 +339,9 @@ Proposal numbering format: `ClienteAñoVersión` — e.g., `WIN2026v1`, `Casaide
 ### Contact block (footer)
 ```html
 <div style="border-top:1pt solid #C0C4CC; margin-top:44px; padding-top:14px; font-family:'Corbel','Calibri',sans-serif;">
-  <p style="font-size:8pt; color:#111; margin:0 0 3px;"><strong>Fernando Horna</strong> — Socio-Director · contacto@targetmaps.pe · [REDACTED]</p>
-  <p style="font-size:8pt; color:#111; margin:0 0 3px;"><strong>Victoria Ballón</strong> — Ejecutiva Comercial · contacto@targetmaps.pe · [REDACTED]</p>
-  <p style="font-size:8pt; color:#909091; margin:0;">Lima, Perú · www.targetmaps.pe</p>
+  <p style="font-size:8pt; color:#111; margin:0 0 3px;"><strong>Fernando Horna</strong> — Socio-Director · contacto@targetmaps.pe</p>
+  <p style="font-size:8pt; color:#111; margin:0 0 3px;"><strong>Victoria Ballón</strong> — Ejecutiva Comercial · contacto@targetmaps.pe</p>
+  <p style="font-size:8pt; color:#909091; margin:0;">www.targetmaps.pe</p>
 </div>
 ```
 
