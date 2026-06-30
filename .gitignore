@@ -1,0 +1,27 @@
+# Repo de ASSETS de marca TargetMaps.
+# Solo deben vivir aquí: logos (PNG/JPG) + claude.design.
+# Todo lo demás (scripts, código, changelogs internos) NO debe publicarse:
+# pertenece a repos privados (p.ej. targetmaps-docserver).
+
+# Código y scripts — nunca en un repo público de assets
+*.py
+__pycache__/
+*.pyc
+
+# Documentos internos / historial de proyecto
+CHANGELOG.md
+*.md
+!README.md
+
+# Secretos y entorno (defensa en profundidad)
+.env
+.env.*
+*.key
+*.pem
+secrets*
+**/credentials*
+
+# Office / temporales / sistema
+~$*
+.DS_Store
+Thumbs.db
