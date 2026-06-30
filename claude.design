@@ -1,12 +1,19 @@
 # TargetMaps — Design System for Claude
-# claude.design v1.0 · 2026-06-29
+# claude.design v2.0 · 2026-06-29
 #
 # DROP THIS FILE IN ANY REPO.
 # Claude will apply TargetMaps brand identity when generating
 # DOCX, PPTX, XLSX, HTML, or PDF documents.
 #
-# Source of truth: imagen_institucional_targetmaps/
-# Scripts:         scripts/tm_brand.py · tm_docx.py · tm_pptx.py · tm_xlsx.py
+# ── SINGLE SOURCE OF TRUTH ────────────────────────────────────────────────────
+# THIS FILE is the canonical brand definition. Everything else DERIVES from it:
+#   · scripts/tm_brand.py    → mirrors these values (do not edit there first)
+#   · skill /tm-marca        → reads this file before generating anything
+#   · skill targetmaps-brand → defers to this file
+# If any other file disagrees with this one, THIS FILE WINS. Update here first,
+# then sync the derived files. Never define a color, font, size, or metric that
+# lives only in code — document it here.
+#
 # Templates:       templates_targetmaps/*.dotx · *.potx
 # Logos CDN:       https://github.com/fhorna-lab/branding_targetmaps
 
@@ -37,10 +44,18 @@ NEVER invent colors outside this list.
 | bg_light       | #F2F2F2 | (242, 242, 242)  | Confidentiality block, neutral bg          |
 | white          | #FFFFFF | (255, 255, 255)  | Page background, odd table rows            |
 | black          | #000000 | (0, 0, 0)        | Body text                                  |
-| subtotal       | #D5E2F4 | (213, 226, 244)  | Subtotal rows in Excel (between stripe/total) |
+| subtotal       | #D5E2F4 | (213, 226, 244)  | Subtotal rows (intermediate level between stripe and total — Excel) |
 | geocoder       | #169A38 | (22, 154, 56)    | Product: GeoCoder                          |
 | geoanalytics   | #28529F | (40, 82, 159)    | Product: GeoAnalytics                      |
 | leadgen        | #F4991D | (244, 153, 29)   | Product: LeadGenerator                     |
+
+Auxiliary UI tints (allowed in HTML/CSS only, derived from the palette — never the primary color of a document):
+
+| Token        | HEX     | Use                                                  |
+|--------------|---------|------------------------------------------------------|
+| ink_soft     | #111111 | Near-black body text in HTML (softer than pure #000) |
+| hairline     | #E0E4EC | Thin separator lines on the cover (lighter than table_border) |
+| callout_accent | #A8C2E8 | Label text inside the dark urgency callout (light tint of blue_mid) |
 
 CSS custom properties (for HTML/PDF output):
 ```css
@@ -52,6 +67,7 @@ CSS custom properties (for HTML/PDF output):
   --tm-table-border: #C0C4CC;
   --tm-bg-light:     #F2F2F2;
   --tm-white:        #FFFFFF;
+  --tm-subtotal:     #D5E2F4;
   --tm-geocoder:     #169A38;
   --tm-geoanalytics: #28529F;
   --tm-leadgen:      #F4991D;
@@ -79,7 +95,15 @@ CSS custom properties (for HTML/PDF output):
 
 CSS font stack: `'Corbel', 'Calibri', 'Gill Sans MT', sans-serif`
 
-PROHIBITED fonts: Comic Sans, Arial, Times New Roman, Inter, Roboto.
+Font roles (do not mix up):
+- **Corbel** — ALL text, headings and body. Fallback: Calibri.
+- **Aptos** — table cells and table headers ONLY (tabular figures, better numeric density).
+  Fallback: Calibri. NEVER use Corbel inside table cells.
+- **Courier New** — monospace / formulas only.
+
+PROHIBITED fonts: Comic Sans, **Arial**, Times New Roman, Inter, Roboto.
+(Arial + the Office default blues #1F3864 / #2E75B6 are the classic "off-brand" tell —
+if you see them in a generated file, it ignored this manual.)
 
 ---
 
@@ -211,6 +235,120 @@ Proposal numbering format: `ClienteAñoVersión` — e.g., `WIN2026v1`, `Casaide
 | Deliverables (3 col) | 4.0 + 9.0 + 3.0    |
 | Executive Summary (2 col) | 4.0 + 12.0    |
 | Schedule (3 col)  | 2.5 + 11.0 + 2.5       |
+
+---
+
+## DOCX / OFFICE METRICS
+
+These are the exact values used to build branded Word/Excel files. They were previously
+implicit in the generation code; they live here now so HTML/PDF output can match Office output
+pixel-for-pixel and so any renderer (server, script, or hand-built) produces identical results.
+
+### Page margins (DOCX)
+
+| Side   | Value  | Note                          |
+|--------|--------|-------------------------------|
+| Top    | 2.0 cm |                               |
+| Bottom | 2.0 cm |                               |
+| Right  | 2.0 cm |                               |
+| Left   | 2.5 cm | **Asymmetric: +0.5 cm** (binding/visual balance) |
+
+### Paragraph spacing (DOCX, in points)
+
+| Element              | Space before | Space after | Line spacing |
+|----------------------|--------------|-------------|--------------|
+| Body paragraph       | 0            | 4           | 14 pt        |
+| Eyebrow (tipo_doc)   | 24           | 8           | —            |
+| Cover title          | 0            | 6           | —            |
+| Cover subtitle       | 0            | 20          | —            |
+| H1                   | 14           | 4           | —            |
+| H2                   | 8            | 3           | —            |
+| Bullet               | 0            | 2           | —            |
+| Caption              | 2            | 6           | —            |
+| Confidentiality      | 12           | 4           | —            |
+| Contact footer       | 24           | 6           | —            |
+
+### Paragraph borders (DOCX, in eighths of a point)
+
+| Element                  | Size (1/8 pt) | ≈ pt   | Color    |
+|--------------------------|---------------|--------|----------|
+| Cover separator          | 12            | 1.5 pt | blue_mid |
+| H1 bottom rule           | 8             | 1.0 pt | blue_mid |
+| Contact footer top rule  | 4             | 0.5 pt | table_border |
+| Table cell border        | 4             | 0.5 pt | table_border |
+
+### Excel (XLSX) specifics
+
+| Item                         | Value                                                        |
+|------------------------------|-------------------------------------------------------------|
+| Header row height            | 18 pt                                                       |
+| Data row height              | 16 pt                                                       |
+| KPI rows (label/value/delta) | 14 / 24 / 14 pt                                             |
+| Freeze panes                 | Always freeze on the header row                             |
+| Numeric alignment            | Every column EXCEPT the first → right-aligned               |
+| First column                 | Bold                                                        |
+| Workbook metadata            | creator = "TargetMaps" · company = "TargetMaps \| GEO ANALYTICS FOR BUSINESS" · keywords = "TargetMaps GeoAnalytics" |
+
+### Alternating-row logic (all formats)
+
+```
+row index i (data rows, 0-based):
+  is_even_visual = (i % 2 == 1)            # 2nd data row is the first striped one
+  background = blue_dark   if total_row
+              else stripe (#F2F6FB) if is_even_visual
+              else white   (#FFFFFF)
+  text       = white if total_row else black
+  bold       = total_row OR (column == first)   # key column always bold
+```
+
+---
+
+## PPTX LAYOUT METRICS
+
+Canvas is 16:9 widescreen = **13.33 in × 7.5 in**. Max 6 text lines per slide.
+
+### Bars
+
+| Bar                                  | Position           | Size                | Color    |
+|--------------------------------------|--------------------|---------------------|----------|
+| Content slide — top bar              | top = 0            | 13.33 in × 0.7 in   | blue_mid |
+| Content slide — separator under bar  | top = 0.7 in       | 13.33 in × 0.05 in  | blue_mid |
+| Cover / closing — bottom strip       | top = 6.9 in       | 13.33 in × 0.6 in   | blue_mid |
+
+### Font sizes (PPTX, in points)
+
+| Element                | Size |
+|------------------------|------|
+| Cover eyebrow          | 11   |
+| Cover title            | 36   |
+| Cover subtitle         | 20   |
+| Cover client           | 14   |
+| Cover date             | 13   |
+| Cover confidentiality  | 9    |
+| Content title          | 24   |
+| Content subtitle       | 14   |
+| Footer (content)       | 8    |
+| Closing "Hablemos"     | 40   |
+| Closing tagline        | 14   |
+| Closing contacts       | 12   |
+| KPI label              | 8    |
+| KPI value              | 26   |
+| KPI delta              | 10   |
+
+### Element positions (left / top / width / height, in inches)
+
+| Element                       | left  | top   | width | height |
+|-------------------------------|-------|-------|-------|--------|
+| Cover eyebrow                 | 0.6   | 1.6   | 12.0  | 0.4    |
+| Cover title                   | 0.6   | 2.1   | 10.0  | 1.8    |
+| Cover subtitle                | 0.6   | 4.0   | 10.0  | 0.7    |
+| Cover client                  | 0.6   | 4.9   | 8.0   | 0.4    |
+| Cover date                    | 0.6   | 5.3   | 8.0   | 0.4    |
+| Cover confidentiality         | 0.6   | 6.95  | 12.0  | 0.4    |
+| Content title                 | 0.5   | 0.85  | 12.0  | 0.7    |
+| Content footer (www, right)   | 10.5  | 7.1   | 2.7   | 0.3    |
+| KPI tile                      | —     | 2.0   | 3.8   | 1.6    |
+| KPI tile — left accent border | —     | —     | 0.07  | tile h |
 
 ---
 
@@ -489,6 +627,11 @@ Before delivering any document, verify:
 - [ ] Proposal number follows format `ClienteAñoVersión`
 - [ ] Language: Spanish (Peru) for all client-facing documents
 - [ ] Prices always net of IGV
+- [ ] No prohibited fonts (Arial / Times New Roman / Comic Sans / Inter / Roboto)
+- [ ] No off-palette colors — especially the Office default blues #1F3864 / #2E75B6
+
+> Tip: run `/tm-marca check <file>` to audit a generated DOCX/PPTX/XLSX/HTML against this
+> checklist automatically (it extracts the real fonts and colors and flags off-brand values).
 
 ---
 
